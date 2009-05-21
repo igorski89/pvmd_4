@@ -69,6 +69,7 @@ public class MainClass {
     	mainWindow.setLocation(100, 100);
     	mainWindow.setSize(1000, 600);
     	mainWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    	mainWindow.setTitle("Main Window");
     	mainWindow.setVisible(true);
     	
 //		Integer a = new Integer(3);

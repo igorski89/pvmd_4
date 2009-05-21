@@ -172,6 +172,13 @@ public class MDSample implements Cloneable {
      * вираховує характеристики вибірки: середнє, дисперсію та ін.
      */
     public void calculateParams() {
+    	for(int i=0; i<dimension; i++){
+    		xmin[i] = 0;
+    		xmax[i] = 0;
+    		disp[i] = 0;
+    		mean[i] = 0;
+    	}
+    	
         //присваиваем начальные значения
         for (int j=0; j<dimension; j++) {
             double tmp = data.get(0).getParams()[j];

@@ -101,7 +101,6 @@ public class MainFrame extends JFrame {
 				JFileChooser openFileChooser = new JFileChooser();
 				openFileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
 				openFileChooser.setMultiSelectionEnabled(false);
-				
 //				openFileChooser.setCurrentDirectory(new File("/Users/igorevsukov/Documents/DNU/PVMD/DATA/DATA_4/"));
 				if (openFileChooser.showOpenDialog(getParent()) == JFileChooser.APPROVE_OPTION){
 					try {
@@ -180,7 +179,8 @@ public class MainFrame extends JFrame {
 						try {
 							BufferedWriter out = new BufferedWriter(new FileWriter(fileName));
 							for(int i = 0; i < mcm.getZ().size(); i++){
-								for(int j=0; j < mcm.getZ().get(0).length; j++) {
+//								for(int j=0; j < mcm.getZ().get(0).length; j++) {
+								for(int j=0; j < mcm.getCompCount(); j++) {
 									out.write(String.valueOf(mcm.getZ().get(i)[j]));
 									out.write("\t");
 								}
@@ -486,7 +486,8 @@ public class MainFrame extends JFrame {
 			public int getColumnCount() {
 				if (mcm == null) return 0;
 //				else return mcm.getCompCount()+1;
-				else return mcm.getSample().getDimension()+1;
+//				else return mcm.getSample().getDimension()+1;
+				else return mcm.getCompCount()+1;
 			}
 			
 			@Override
@@ -496,19 +497,22 @@ public class MainFrame extends JFrame {
 			
 			@Override
 			public String getColumnName(int columnIndex) {
-				if (columnIndex < mcm.getSample().getDimension()) return "z"+String.valueOf(columnIndex);
+//				if (columnIndex < mcm.getSample().getDimension()) return "z"+String.valueOf(columnIndex);
+				if (columnIndex < mcm.getCompCount()) return "z"+String.valueOf(columnIndex);
 				else return "delta";
 			}
 
 			@Override
 			public int getRowCount() {
 				if (mcm == null) return 0;
-				else return mcm.getSample().getDimension();
+//				else return mcm.getSample().getDimension();
+				else return mcm.getCompCount();
 			}
 
 			@Override
 			public Object getValueAt(int rowIndex, int columnIndex) {
-				if (columnIndex < mcm.getSample().getDimension()) return mcm.getA().get(columnIndex)[rowIndex];
+//				if (columnIndex < mcm.getSample().getDimension()) return mcm.getA().get(columnIndex)[rowIndex];
+				if (columnIndex < mcm.getCompCount()) return mcm.getA().get(columnIndex)[rowIndex];
 				else return mcm.getDelta().get(rowIndex);
 			}
 			
@@ -523,7 +527,8 @@ public class MainFrame extends JFrame {
 			@Override
 			public int getColumnCount() {
 				if (mcm == null) return 0;
-				else return mcm.getSample().getDimension()+1;
+//				else return mcm.getSample().getDimension()+1;
+				else return mcm.getCompCount()+1;
 			}
 			
 			@Override
@@ -533,7 +538,8 @@ public class MainFrame extends JFrame {
 			
 			@Override
 			public String getColumnName(int columnIndex) {
-				if (columnIndex < mcm.getSample().getDimension()) return "lambda"+String.valueOf(columnIndex);
+//				if (columnIndex < mcm.getSample().getDimension()) return "lambda"+String.valueOf(columnIndex);
+				if (columnIndex < mcm.getCompCount()) return "lambda"+String.valueOf(columnIndex);
 				else return "sum";
 			}
 
@@ -545,13 +551,15 @@ public class MainFrame extends JFrame {
 
 			@Override
 			public Object getValueAt(int rowIndex, int columnIndex) {
-				if (columnIndex < mcm.getSample().getDimension()) {
+//				if (columnIndex < mcm.getSample().getDimension()) {
+				if (columnIndex < mcm.getCompCount()){
 					if (rowIndex == 0) return mcm.getEignValue().get(columnIndex);
 					else return new Double((mcm.getEignValue().get(columnIndex).doubleValue()/mcm.getSample().getDimension())*100);
 				}
 				else {
 					double sum = 0;
-					for(int j=0; j < mcm.getSample().getDimension(); j++) sum += mcm.getEignValue().get(j).doubleValue();
+//					for(int j=0; j < mcm.getSample().getDimension(); j++) sum += mcm.getEignValue().get(j).doubleValue();
+					for(int j=0; j < mcm.getCompCount(); j++) sum += mcm.getEignValue().get(j).doubleValue();
 					if (rowIndex == 0) return new Double(sum);
 					else return new Double((sum/mcm.getSample().getDimension())*100);
 				}

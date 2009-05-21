@@ -44,7 +44,7 @@ public class MainComponentsMethod {
 	public MainComponentsMethod(MDSample sample){
 		this.sample = sample.clone();
 		this.sample.normalize();
-		this.sample.center();
+//		this.sample.center();
 	}
 	
 	/**
